@@ -1,0 +1,112 @@
+User Guide
+==========
+
+Overview
+--------
+
+The 5D Interpolator App allows you to:
+
+- Upload a 5D dataset
+- Train a neural network
+- Explore predictions using interactive sliders
+
+This page explains how to use the app step-by-step.
+
+Dataset format
+--------------
+
+The app expects a ``.pkl`` (pickle) file containing either:
+
+**Option 1: Dictionary format**
+
+.. code-block:: python
+
+    {"X": X_array, "y": y_array}
+
+**Option 2: Tuple format**
+
+.. code-block:: python
+
+    (X_array, y_array, ...)
+
+Where:
+
+- ``X_array``: 2D array with shape ``(n_samples, 5)`` — exactly 5 features
+- ``y_array``: 1D array with shape ``(n_samples,)`` — target values
+- ``n_samples`` must match between ``X`` and ``y``
+
+
+Step 1 - Upload a dataset
+-------------------------
+
+1. Open ``http://localhost:3000`` in your browser.
+2. You should be on the **"Upload"** step.
+3. Click **"Choose file"** and select your ``.pkl`` file.
+
+On successful upload, the page displays:
+
+- Number of **samples** and **features**
+- **First 5 rows** of ``X`` and ``y`` 
+- **min/max** values per feature (on slider ranges)
+- **Target min/max** values
+
+
+Step 2 - Train the model
+------------------------
+
+1. Switch to the **"Train"** step.
+2. Configure hyperparameters (optional):
+
+   .. list-table::
+      :header-rows: 1
+      :widths: 25 15 60
+
+      * - Parameter
+        - Default
+        - Description
+      * - Learning rate
+        - 0.001
+        - Controls how fast the model learns
+      * - Max epochs
+        - 200
+        - Maximum training iterations
+      * - Batch size
+        - 64
+        - Samples per training batch
+      * - Hidden layers
+        - 64,32,16
+        - Network architecture (comma-separated)
+
+3. Click **"Train model"**.
+
+**What happens during training:**
+
+1. Missing values are handled (drop missing targets, replace missing features with column means)
+2. Data is split: **60% train / 20% validation / 20% test**
+3. Features are standardised 
+4. Neural network is trained on the training set
+
+**After training, the UI shows:**
+
+- Number of train, validation, and test samples
+- Validation RMSE (root mean squared error)
+
+You can click **"Train model"** again to retrain with different hyperparameters.
+
+
+Step 3 - Predict
+----------------
+
+1. Switch to the **"Predict"** step.
+2. You will see **five sliders**, one for each feature.
+
+   - Slider ranges are set from the min/max of your uploaded dataset
+   - The current value is displayed next to each slider
+
+3. Adjust the sliders to define your 5D input point.
+4. Click **"Run prediction"**.
+
+The app displays:
+
+- The input values used for the prediction
+- The **predicted target value**

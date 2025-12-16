@@ -1,0 +1,248 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Guide &mdash; interpolator-app  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Practical Usage Examples" href="usage.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            interpolator-app
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">User Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dataset-format">Dataset format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-1-upload-a-dataset">Step 1 – Upload a dataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-2-train-the-model">Step 2 – Train the model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-3-predict">Step 3 – Predict</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tips">Tips</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Practical Usage Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">Performances and Profiling</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">interpolator-app</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">User Guide</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/guide.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="user-guide">
+<h1>User Guide<a class="headerlink" href="#user-guide" title="Link to this heading"></a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>The 5D Interpolator App allows you to:</p>
+<ul class="simple">
+<li><p>Upload a 5D dataset</p></li>
+<li><p>Train a neural network</p></li>
+<li><p>Explore predictions using interactive sliders</p></li>
+</ul>
+<p>This page explains how to use the app step-by-step.</p>
+</section>
+<section id="dataset-format">
+<h2>Dataset format<a class="headerlink" href="#dataset-format" title="Link to this heading"></a></h2>
+<p>The app expects a <code class="docutils literal notranslate"><span class="pre">.pkl</span></code> (pickle) file containing either:</p>
+<p><strong>Option 1: Dictionary format</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="n">X_array</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="n">y_array</span><span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Option 2: Tuple format</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">X_array</span><span class="p">,</span> <span class="n">y_array</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">X_array</span></code>: 2D array with shape <code class="docutils literal notranslate"><span class="pre">(n_samples,</span> <span class="pre">5)</span></code> — exactly 5 features</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">y_array</span></code>: 1D array with shape <code class="docutils literal notranslate"><span class="pre">(n_samples,)</span></code> — target values</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">n_samples</span></code> must match between <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code></p></li>
+</ul>
+<p>See the installation page for details on how to start the app (if you haven’t already).</p>
+</section>
+<section id="step-1-upload-a-dataset">
+<h2>Step 1 – Upload a dataset<a class="headerlink" href="#step-1-upload-a-dataset" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Open <code class="docutils literal notranslate"><span class="pre">http://localhost:3000</span></code> in your browser.</p></li>
+<li><p>You should be on the <strong>“Upload”</strong> step.</p></li>
+<li><p>Click <strong>“Choose file”</strong> and select your <code class="docutils literal notranslate"><span class="pre">.pkl</span></code> file.</p></li>
+</ol>
+<p>On successful upload, the page displays:</p>
+<ul class="simple">
+<li><p>Number of <strong>samples</strong> and <strong>features</strong></p></li>
+<li><p><strong>First 5 rows</strong> of <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code></p></li>
+<li><p><strong>min/max</strong> values per feature (on slider ranges)</p></li>
+<li><p><strong>Target min/max</strong> values</p></li>
+</ul>
+</section>
+<section id="step-2-train-the-model">
+<h2>Step 2 – Train the model<a class="headerlink" href="#step-2-train-the-model" title="Link to this heading"></a></h2>
+<ol class="arabic">
+<li><p>Switch to the <strong>“Train”</strong> step.</p></li>
+<li><p>Configure hyperparameters (optional):</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 15.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Learning rate</p></td>
+<td><p>0.001</p></td>
+<td><p>Controls how fast the model learns</p></td>
+</tr>
+<tr class="row-odd"><td><p>Max epochs</p></td>
+<td><p>200</p></td>
+<td><p>Maximum training iterations</p></td>
+</tr>
+<tr class="row-even"><td><p>Batch size</p></td>
+<td><p>64</p></td>
+<td><p>Samples per training batch</p></td>
+</tr>
+<tr class="row-odd"><td><p>Hidden layers</p></td>
+<td><p>64,32,16</p></td>
+<td><p>Network architecture (comma-separated)</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p>Click <strong>“Train model”</strong>.</p></li>
+</ol>
+<p><strong>What happens during training:</strong></p>
+<ol class="arabic simple">
+<li><p>Missing values are handled (drop missing targets, replace missing features with column means)</p></li>
+<li><p>Data is split: <strong>60% train / 20% validation / 20% test</strong></p></li>
+<li><p>Features are standardised</p></li>
+<li><p>Neural network is trained on the training set</p></li>
+</ol>
+<p><strong>After training, the UI shows:</strong></p>
+<ul class="simple">
+<li><p>Number of train, validation, and test samples</p></li>
+<li><p>Validation RMSE (root mean squared error)</p></li>
+</ul>
+<p>You can click <strong>“Train model”</strong> again to retrain with different hyperparameters.</p>
+</section>
+<section id="step-3-predict">
+<h2>Step 3 – Predict<a class="headerlink" href="#step-3-predict" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Switch to the <strong>“Predict”</strong> step.</p></li>
+<li><p>You will see <strong>five sliders</strong>, one for each feature.</p>
+<ul class="simple">
+<li><p>Slider ranges are set from the min/max of your uploaded dataset</p></li>
+<li><p>The current value is displayed next to each slider</p></li>
+</ul>
+</li>
+<li><p>Adjust the sliders to define your 5D input point.</p></li>
+<li><p>Click <strong>“Run prediction”</strong>.</p></li>
+</ol>
+<p>The app displays:</p>
+<ul class="simple">
+<li><p>The input values used for the prediction</p></li>
+<li><p>The <strong>predicted target value</strong></p></li>
+</ul>
+</section>
+<section id="tips">
+<h2>Tips<a class="headerlink" href="#tips" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Start with default hyperparameters</strong> — they work well for most datasets.</p></li>
+<li><p><strong>Check validation RMSE</strong> — lower values indicate better model fit.</p></li>
+<li><p><strong>Re-upload to reset</strong> — uploading a new dataset clears the trained model.</p></li>
+<li><p><strong>Explore the sliders</strong> — move them to see how predictions change across
+the feature space.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="usage.html" class="btn btn-neutral float-right" title="Practical Usage Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Nabeel Chaudary.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,178 @@
+Testing
+=======
+
+Running Tests
+-------------
+
+**Option 1: Using the script (recommended)**
+
+From the project root::
+
+    ./scripts/run-tests.sh
+
+This script automatically:
+
+- Uses ``docker compose run --rm backend pytest -sv tests`` if Docker is available
+- Otherwise runs ``pytest -sv tests`` locally inside ``backend/``
+
+**Option 2: With Docker**
+
+::
+
+    docker compose run --rm backend pytest -sv tests
+
+**Option 3: Locally**
+
+::
+
+    cd backend
+    pytest -sv tests
+
+A successful run shows all tests as ``PASSED``.
+
+----
+
+Test Suite Summary
+------------------
+
+All tests are located in ``backend/tests/`` and follow pytest conventions.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 20 60
+
+   * - File
+     - Module Tested
+     - Purpose
+   * - ``test_data.py``
+     - ``fivedreg.data``
+     - Data loading, preprocessing, splitting
+   * - ``test_model.py``
+     - ``fivedreg.model``
+     - Neural network initialisation and training
+   * - ``test_main.py``
+     - ``main.py``
+     - API endpoints (upload, train, predict)
+
+----
+
+test_data.py
+------------
+
+Tests for the data handling module (``fivedreg.data``).
+
+**test_load_dataset**
+
+- Creates a temporary ``.pkl`` file with ``X`` (100×5) and ``y`` (100,)
+- Calls ``load_dataset()`` and verifies:
+
+  - Total samples across train/val/test equals 100
+  - All splits have 5 features
+  - Feature mean and std arrays have length 5
+
+**test_load_dataset_fails**
+
+- Creates a ``.pkl`` file with wrong number of features (3 instead of 5)
+- Verifies ``load_dataset()`` raises ``ValueError``
+
+**test_handle_missing_values**
+
+- Creates data with NaN values in both ``X`` and ``y``
+- Verifies:
+
+  - Rows where ``y`` is NaN are dropped
+  - NaN values in ``X`` are replaced with column means
+  - No NaN values remain in cleaned data
+
+**test_split_and_standardise**
+
+- Creates a 120-sample dataset
+- Calls ``split_and_standardise()`` and verifies:
+
+  - All splits have correct dimensions (5 features)
+  - Feature mean/std arrays have length 5
+  - Training data has approximately zero mean and unit std
+
+**test_load_from_bytes**
+
+- Creates pickled bytes from a valid dataset
+- Verifies ``load_from_bytes()`` returns correct shapes
+
+**test_load_from_bytes_fails**
+
+- Creates invalid pickled bytes (missing required keys)
+- Verifies ``load_from_bytes()`` raises ``ValueError``
+
+----
+
+test_model.py
+-------------
+
+Tests for the neural network model (``fivedreg.model``).
+
+**test_neural_network_init**
+
+- Creates a ``NeuralNetwork`` with specific hyperparameters
+- Verifies all attributes are set correctly:
+
+  - ``input_dim=5``
+  - ``hidden_layers=[10, 5]``
+  - ``learning_rate=1e-3``
+  - ``max_epochs=10``
+  - ``batch_size=8``
+
+**test_neural_network**
+
+- Creates a small synthetic dataset (50 samples)
+- Trains a ``NeuralNetwork`` for 5 epochs
+- Verifies predictions have correct shape (50,)
+
+----
+
+test_main.py
+------------
+
+Tests for the FastAPI endpoints (``main.py``).
+
+**test_health_endpoint**
+
+- Calls ``GET /health``
+- Verifies:
+
+  - Status code is 200
+  - Response contains ``{"status": "ok"}``
+
+**test_train_fails**
+
+- Calls ``POST /train`` without uploading a dataset first
+- Verifies:
+
+  - Status code is 400
+  - Error message contains "No dataset uploaded"
+
+**test_predict_fails**
+
+- Calls ``POST /predict`` without training a model first
+- Verifies:
+
+  - Status code is 400
+  - Error message contains "Model is not trained yet"
+
+**test_full_flow**
+
+End-to-end test of the complete workflow:
+
+1. **Upload**: Posts a test ``.pkl`` file to ``/upload``
+
+   - Verifies status 200
+   - Verifies response contains ``n_samples=100`` and ``n_features=5``
+
+2. **Train**: Posts training config to ``/train``
+
+   - Verifies status 200
+   - Verifies response contains train/val/test sample counts
+
+3. **Predict**: Posts 5D input to ``/predict``
+
+   - Verifies status 200
+   - Verifies response contains input array (length 5) and prediction (float)

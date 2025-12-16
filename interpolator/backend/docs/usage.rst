@@ -1,0 +1,196 @@
+Practical Usage Examples
+========================
+
+This page shows how to use the ``fivedreg`` package in Python. 
+Make sure to install the package first.
+
+
+Importing the package
+---------------------
+
+The package provides two main modules.
+one for data handling and one for the model:
+
+.. code-block:: python
+
+    from fivedreg.data import (
+        generate_dataset,
+        generate_pkl,
+        load_dataset,
+        handle_missing_values,
+        split_and_standardise,
+    )
+    from fivedreg.model import NeuralNetwork
+
+
+Step 1: Generate a synthetic dataset
+---------------------------------------
+
+Generate synthetic 5D data and save it to a pickle file:
+
+.. code-block:: python
+
+    
+    # Generate 5000 samples and save to a .pkl file
+    filepath = generate_pkl(
+        n=5000,
+        seed=21,
+        filename="test_dataset.pkl"
+    )
+
+    print(f"Dataset saved to: {filepath}")
+
+Output::
+
+    Generating 5000 synthetic 5D data points...
+    Saved synthetic data to: ./test_dataset.pkl
+    Data shape: X=(5000, 5), y=(5000,)
+    Feature ranges: x1-x5 ∈ [0,1], y ∈ [-0.523, 1.284]
+
+You can also generate data directly without saving:
+
+.. code-block:: python   
+
+    X, y = generate_dataset(n_samples=1000, seed=21)
+    print(f"X shape: {X.shape}")  # (1000, 5)
+    print(f"y shape: {y.shape}")  # (1000,)
+
+
+Step 2: Load and preprocess a dataset
+----------------------------------------
+
+Load the pickle file and get the train/val/test splits:
+
+.. code-block:: python
+
+    from fivedreg.data import load_dataset
+
+    
+    (
+        X_train, y_train,
+        X_val, y_val,
+        X_test, y_test,
+        feature_mean, feature_std
+    ) = load_dataset("./data/my_dataset.pkl")
+
+    print(f"Train: {X_train.shape[0]} samples")
+    print(f"Val:   {X_val.shape[0]} samples")
+    print(f"Test:  {X_test.shape[0]} samples")
+
+Output::
+
+    Loaded dataset with 5000 samples and 5 features.
+    Removed 0 rows where y was missing.
+    Train size: 3000
+    Validation size: 1000
+    Test size: 1000
+
+The ``load_dataset`` function:
+
+1. Loads the pickle file
+2. Handles missing values 
+3. Splits data: 60% train / 20% val / 20% test
+4. Standardises features 
+5. Returns the splits and the feature mean/std
+
+**Preprocessing arrays directly (without saving to file):**
+
+If you already have ``X`` and ``y`` arrays in memory, you can preprocess them directly:
+
+.. code-block:: python
+
+    from fivedreg.data import (
+        generate_dataset,
+        handle_missing_values,
+        split_and_standardise,
+    )
+
+    # Generate or load your data
+    X, y = generate_dataset(n_samples=5000, seed=21)
+
+    # 1. Handle missing values
+    X_clean, y_clean = handle_missing_values(X, y)
+
+    # 2. Split and standardise
+    (
+        X_train, y_train,
+        X_val, y_val,
+        X_test, y_test,
+        feature_mean, feature_std
+    ) = split_and_standardise(X_clean, y_clean, random_state=42)
+
+    print(f"Train: {X_train.shape[0]} samples")
+    print(f"Val:   {X_val.shape[0]} samples")
+    print(f"Test:  {X_test.shape[0]} samples")
+
+
+Step 3: Train a neural network
+---------------------------------
+
+Train the model:
+
+.. code-block:: python
+
+    from fivedreg.model import NeuralNetwork
+
+    # Create model with custom hyperparameters
+    model = NeuralNetwork(
+        input_dim=5,
+        hidden_layers=[64, 32, 16],
+        learning_rate=0.001,
+        max_epochs=200,
+        batch_size=64,
+    )
+
+    # Train on training data
+    model.fit(X_train, y_train)
+
+During training, you'll see epoch-by-epoch loss::
+
+    Epoch 1: loss = 0.2241
+    Epoch 2: loss = 0.1423
+    ...
+    Epoch 200: loss = 0.0012
+
+
+Step 4: Make predictions
+---------------------------
+
+Use the trained model to predict on new data:
+
+.. code-block:: python
+
+    import numpy as np
+
+    # Predict on test set
+    y_pred = model.predict(X_test)
+    print(f"Predictions shape: {y_pred.shape}")  # (1000,)
+
+    # Predict on a single sample
+    single_input = X_test[0:1]  # Shape: (1, 5)
+    single_pred = model.predict(single_input)
+    print(f"Single prediction: {single_pred[0]:.4f}")
+
+
+Step 5: Evaluate the model
+-----------------------------
+
+Calculate metrics on the test set:
+
+.. code-block:: python
+
+    from sklearn.metrics import mean_squared_error, r2_score
+    import numpy as np
+
+    # Predict on test set
+    y_pred = model.predict(X_test)
+
+    # Calculate metrics
+    mse = mean_squared_error(y_test, y_pred)
+    rmse = np.sqrt(mse)
+    r2 = r2_score(y_test, y_pred)
+
+    print(f"Test MSE:  {mse:.4f}")
+    print(f"Test RMSE: {rmse:.4f}")
+    print(f"Test R²:   {r2:.4f}")
+
