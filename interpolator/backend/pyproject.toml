@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "interpolator-app"
+version = "0.1.0"
+description = "5 dimensional interpolator"
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [
+    { name = "Nabeel Chaudary", email = "nc680@cam.ac.uk" }
+]
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.30",
+    "numpy",
+    "matplotlib",
+    "pydantic",
+    "scikit-learn",
+    "torch",
+    "python-multipart",
+    "pytest",                           # for tests
+    "httpx",                            # for tests
+    "sphinx>=7,<9",                     #for docs
+    "sphinx-autodoc-typehints",         #for docs
+    "sphinx_rtd_theme>=1.3"             #for docs
+    
+]
+requires-python = ">=3.12"
+
+[tool.setuptools]
+packages = ["fivedreg"]
+py-modules = ["main"]
