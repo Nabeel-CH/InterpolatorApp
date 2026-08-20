@@ -87,7 +87,7 @@ Health check endpoint.
 POST /upload
 ~~~~~~~~~~~~
 
-Upload a dataset in ``.pkl`` format.
+Upload dataset in ``.pkl`` format.
 
 **Request:**
 

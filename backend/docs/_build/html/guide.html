@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>User Guide &mdash; interpolator-app  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
@@ -48,10 +48,9 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">User Guide</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#dataset-format">Dataset format</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#step-1-upload-a-dataset">Step 1 – Upload a dataset</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#step-2-train-the-model">Step 2 – Train the model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#step-3-predict">Step 3 – Predict</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#tips">Tips</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-1-upload-a-dataset">Step 1 - Upload a dataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-2-train-the-model">Step 2 - Train the model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-3-predict">Step 3 - Predict</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Practical Usage Examples</a></li>
@@ -100,7 +99,7 @@
 <h2>Dataset format<a class="headerlink" href="#dataset-format" title="Link to this heading"></a></h2>
 <p>The app expects a <code class="docutils literal notranslate"><span class="pre">.pkl</span></code> (pickle) file containing either:</p>
 <p><strong>Option 1: Dictionary format</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="n">X_array</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="n">y_array</span><span class="p">}</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">"X"</span><span class="p">:</span> <span class="n">X_array</span><span class="p">,</span> <span class="s2">"y"</span><span class="p">:</span> <span class="n">y_array</span><span class="p">}</span>
 </pre></div>
 </div>
 <p><strong>Option 2: Tuple format</strong></p>
@@ -113,10 +112,9 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">y_array</span></code>: 1D array with shape <code class="docutils literal notranslate"><span class="pre">(n_samples,)</span></code> — target values</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">n_samples</span></code> must match between <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code></p></li>
 </ul>
-<p>See the installation page for details on how to start the app (if you haven’t already).</p>
 </section>
 <section id="step-1-upload-a-dataset">
-<h2>Step 1 – Upload a dataset<a class="headerlink" href="#step-1-upload-a-dataset" title="Link to this heading"></a></h2>
+<h2>Step 1 - Upload a dataset<a class="headerlink" href="#step-1-upload-a-dataset" title="Link to this heading"></a></h2>
 <ol class="arabic simple">
 <li><p>Open <code class="docutils literal notranslate"><span class="pre">http://localhost:3000</span></code> in your browser.</p></li>
 <li><p>You should be on the <strong>“Upload”</strong> step.</p></li>
@@ -131,7 +129,7 @@
 </ul>
 </section>
 <section id="step-2-train-the-model">
-<h2>Step 2 – Train the model<a class="headerlink" href="#step-2-train-the-model" title="Link to this heading"></a></h2>
+<h2>Step 2 - Train the model<a class="headerlink" href="#step-2-train-the-model" title="Link to this heading"></a></h2>
 <ol class="arabic">
 <li><p>Switch to the <strong>“Train”</strong> step.</p></li>
 <li><p>Configure hyperparameters (optional):</p>
@@ -184,7 +182,7 @@
 <p>You can click <strong>“Train model”</strong> again to retrain with different hyperparameters.</p>
 </section>
 <section id="step-3-predict">
-<h2>Step 3 – Predict<a class="headerlink" href="#step-3-predict" title="Link to this heading"></a></h2>
+<h2>Step 3 - Predict<a class="headerlink" href="#step-3-predict" title="Link to this heading"></a></h2>
 <ol class="arabic simple">
 <li><p>Switch to the <strong>“Predict”</strong> step.</p></li>
 <li><p>You will see <strong>five sliders</strong>, one for each feature.</p>
@@ -200,16 +198,6 @@
 <ul class="simple">
 <li><p>The input values used for the prediction</p></li>
 <li><p>The <strong>predicted target value</strong></p></li>
-</ul>
-</section>
-<section id="tips">
-<h2>Tips<a class="headerlink" href="#tips" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p><strong>Start with default hyperparameters</strong> — they work well for most datasets.</p></li>
-<li><p><strong>Check validation RMSE</strong> — lower values indicate better model fit.</p></li>
-<li><p><strong>Re-upload to reset</strong> — uploading a new dataset clears the trained model.</p></li>
-<li><p><strong>Explore the sliders</strong> — move them to see how predictions change across
-the feature space.</p></li>
 </ul>
 </section>
 </section>

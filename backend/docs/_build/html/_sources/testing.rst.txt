@@ -63,7 +63,7 @@ Tests for the data handling module (``fivedreg.data``).
 
 **test_load_dataset**
 
-- Creates a temporary ``.pkl`` file with ``X`` (100×5) and ``y`` (100,)
+- Creates a temporary ``.pkl`` file with ``X`` (100x5) and ``y`` (100,)
 - Calls ``load_dataset()`` and verifies:
 
   - Total samples across train/val/test equals 100

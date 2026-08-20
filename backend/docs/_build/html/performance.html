@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Performances and Profiling &mdash; interpolator-app  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
@@ -113,7 +113,7 @@ all runs:</p>
 </ul>
 </li>
 <li><p>Timing was measured.</p></li>
-<li><p>Peak memory (in MB) during <em>training</em> and <em>prediction</em> was measured.
+<li><p>Peak memory (in MB) during training and prediction was measured.
 Peak memory is used rather than average memory because it represents the
 worst case memory usage.</p></li>
 </ul>
@@ -136,7 +136,7 @@ automatically detects Docker and falls back to local execution if needed:</p>
 <li><p>Run <code class="docutils literal notranslate"><span class="pre">plot_results.py</span></code> to generate visualizations</p></li>
 <li><p>Save plots to <code class="docutils literal notranslate"><span class="pre">backend/analysis/plots/</span></code></p></li>
 </ol>
-<p><strong>Method 2: Manual execution</strong></p>
+<p><strong>Method 2: Manual</strong></p>
 <p>If you prefer to run the scripts manually:</p>
 <p>Local (from the project root):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">backend</span>
@@ -219,7 +219,7 @@ datasets up to 10K samples. Key findings:</p>
 <li><p><strong>Model accuracy</strong> improves significantly from 1K to 5K samples
 (R² improves from 0.95 to 0.99), with diminishing returns beyond a dataset size of 5K.</p></li>
 </ul>
-<p>The model achieves excellent fit (R² &gt; 0.99) with just 5K training samples.</p>
+<p>The model achieves an excellent fit (R² &gt; 0.99) with just 5K training samples.</p>
 </section>
 <section id="training-and-prediction-time">
 <h3>Training and Prediction Time<a class="headerlink" href="#training-and-prediction-time" title="Link to this heading"></a></h3>
@@ -232,7 +232,7 @@ datasets up to 10K samples. Key findings:</p>
 </ul>
 <p>This shows a clear increase with dataset size, where the time scales
 roughly linearly with the dataset size. This shows that the model
-scales reasonably well up to 10K samples (on CPU).</p>
+scales reasonably well on CPU up to 10K samples.</p>
 <p>Prediction time remains extremely fast across all dataset sizes (~2-3ms). This is because
 prediction only depends on the trained model architecture and not on the
 original training dataset size.</p>
@@ -248,10 +248,10 @@ rather than a dependence on dataset size.</p></li>
 <li><p>For 5K and 10K samples the reported training peak is below 0.3 MB,
 consistent with the model being able to process the dataset in batches
 without holding the entire dataset in memory at once.</p></li>
-<li><p>Prediction peak memory is essentially constant (~0.003 MB).
+<li><p>Prediction peak memory is pretty much constant (~0.003 MB).
 This is because it only depends on the model and batch size used at test time.</p></li>
 </ul>
-<p>Overall, <strong>memory usage is not a bottleneck</strong> at these scales, and the
+<p>Overall, memory usage is not a bottleneck at these scales, and the
 model is comfortable to run on CPU.</p>
 </section>
 <section id="model-accuracy">
@@ -267,12 +267,10 @@ orange) against dataset size:</p>
 R² reaches ~0.996.</p></li>
 </ul>
 <p>The biggest accuracy gain comes from increasing the dataset from 1K to
-5K samples. Beyond 5K, improvements are smaller, indicating <strong>diminishing
-returns</strong> once the model has enough data to capture the underlying 5D
-target function.</p>
-<p>This suggests that for most practical applications, a dataset of 5K samples
-provides an excellent balance between data collection effort and model
-accuracy.</p>
+5K samples. Beyond 5K, improvements are smaller, which suggests there are diminishing
+returns once the model has enough data to understand the underlying function.</p>
+<p>This suggests that for most cases, a dataset of 5K samples
+provides a good balance between dataset size and model accuracy.</p>
 </section>
 </section>
 </section>

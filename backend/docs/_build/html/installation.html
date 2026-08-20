@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Installation &mdash; interpolator-app  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
@@ -46,7 +46,7 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#quick-start-docker-recommended">Quick start (Docker – recommended)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#quick-start-docker-recommended">Quick start (Docker - recommended)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#manual-setup-without-docker">Manual setup (without Docker)</a></li>
 </ul>
 </li>
@@ -97,13 +97,13 @@
 </ul>
 </section>
 <section id="quick-start-docker-recommended">
-<h2>Quick start (Docker – recommended)<a class="headerlink" href="#quick-start-docker-recommended" title="Link to this heading"></a></h2>
+<h2>Quick start (Docker - recommended)<a class="headerlink" href="#quick-start-docker-recommended" title="Link to this heading"></a></h2>
 <p>Clone the repository and move into it:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="o">&lt;</span><span class="n">your</span><span class="o">-</span><span class="n">repo</span><span class="o">-</span><span class="n">url</span><span class="o">&gt;</span>
-<span class="n">cd</span> <span class="n">interpolator</span>
+<span class="n">cd</span> <span class="n">InterpolatorApp</span>
 </pre></div>
 </div>
-<p>Make sure Docker is running, then start the full stack (backend + frontend):</p>
+<p>Make sure Docker is running, then run:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">scripts</span><span class="o">/</span><span class="n">docker</span><span class="o">-</span><span class="n">start</span><span class="o">.</span><span class="n">sh</span>
 </pre></div>
 </div>
@@ -139,7 +139,7 @@ uvicorn<span class="w"> </span>main:app<span class="w"> </span>--host<span class
 <p><strong>Faster Installation (Recommended)</strong></p>
 <p>The Docker build automatically installs the CPU-only version of PyTorch
 instead of the full GPU version for faster builds.
-You can do the same for manual installation:</p>
+You can do the same if you would like to save some time:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install PyTorch CPU-only first</span>
 pip<span class="w"> </span>install<span class="w"> </span>torch<span class="w"> </span>--index-url<span class="w"> </span>https://download.pytorch.org/whl/cpu
 
@@ -155,8 +155,7 @@ npm<span class="w"> </span>run<span class="w"> </span>dev
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The frontend defaults to <code class="docutils literal notranslate"><span class="pre">http://localhost:8000</span></code> for the API. Make sure
-the backend is running before starting the frontend.</p>
+<p>Make sure the backend is running before starting the frontend.</p>
 </div>
 <p>The application will then be available at:</p>
 <ul class="simple">

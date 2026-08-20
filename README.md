@@ -230,7 +230,7 @@ file:///…/backend/docs/_build/html/index.html
 
 If using WSL Linux the URL will open like in the following example: 
 ```text
-file://wsl.localhost/Ubuntu/home/nabeel/projects/c1/InterpolatorApp/backend/docs/_build/html/index.html
+file://wsl.localhost/Ubuntu/home/nabeel/projects/InterpolatorApp/backend/docs/_build/html/index.html
 ```
 
 ---

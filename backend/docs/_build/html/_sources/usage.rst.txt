@@ -2,7 +2,7 @@ Practical Usage Examples
 ========================
 
 This page shows how to use the ``fivedreg`` package in Python. 
-Make sure to install the package first. See :doc:`installation` for details.
+Make sure to install the package first.
 
 
 Importing the package

@@ -12,15 +12,15 @@ Requirements
   - Node.js 20.x or higher
 
 
-Quick start (Docker – recommended)
+Quick start (Docker - recommended)
 ----------------------------------
 
 Clone the repository and move into it::
 
     git clone <your-repo-url>
-    cd interpolator
+    cd InterpolatorApp
 
-Make sure Docker is running, then start the full stack (backend + frontend)::
+Make sure Docker is running, then run::
 
     ./scripts/docker-start.sh
 
@@ -62,7 +62,7 @@ separately.
 
 The Docker build automatically installs the CPU-only version of PyTorch
 instead of the full GPU version for faster builds.
-You can do the same for manual installation:
+You can do the same if you would like to save some time:
 
 .. code-block:: bash
 
@@ -83,8 +83,7 @@ You can do the same for manual installation:
 
 .. note::
 
-   The frontend defaults to ``http://localhost:8000`` for the API. Make sure
-   the backend is running before starting the frontend.
+   Make sure the backend is running before starting the frontend.
 
 The application will then be available at:
 

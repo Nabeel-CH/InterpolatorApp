@@ -18,7 +18,7 @@ Quick start (Docker - recommended)
 Clone the repository and move into it::
 
     git clone <your-repo-url>
-    cd interpolator
+    cd InterpolatorApp
 
 Make sure Docker is running, then run::
 

@@ -35,10 +35,8 @@ Where:
 - ``y_array``: 1D array with shape ``(n_samples,)`` — target values
 - ``n_samples`` must match between ``X`` and ``y``
 
-See the installation page for details on how to start the app (if you haven't already).
 
-
-Step 1 – Upload a dataset
+Step 1 - Upload a dataset
 -------------------------
 
 1. Open ``http://localhost:3000`` in your browser.
@@ -53,7 +51,7 @@ On successful upload, the page displays:
 - **Target min/max** values
 
 
-Step 2 – Train the model
+Step 2 - Train the model
 ------------------------
 
 1. Switch to the **"Train"** step.
@@ -96,7 +94,7 @@ Step 2 – Train the model
 You can click **"Train model"** again to retrain with different hyperparameters.
 
 
-Step 3 – Predict
+Step 3 - Predict
 ----------------
 
 1. Switch to the **"Predict"** step.
@@ -112,13 +110,3 @@ The app displays:
 
 - The input values used for the prediction
 - The **predicted target value**
-
-
-Tips
-----
-
-- **Start with default hyperparameters** — they work well for most datasets.
-- **Check validation RMSE** — lower values indicate better model fit.
-- **Re-upload to reset** — uploading a new dataset clears the trained model.
-- **Explore the sliders** — move them to see how predictions change across
-  the feature space.
